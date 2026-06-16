@@ -2,35 +2,56 @@
 <html>
 
 <head>
-  <title>jsPsychPluginGroupChat Example</title>
-  <script src="https://unpkg.com/jspsych"></script>
+  <title>jsPsychPluginJatosGroupChat Example</title>
+  <!-- <script src="https://unpkg.com/jspsych"></script> -->
   <!-- Load the published plugin package here, e.g.
-<script src="https://unpkg.com/plugin-jatos-group-chat"></script>
+<script src="https://unpkg.com/plugin-jatos-waiting-room"></script>
 <script src="../dist/index.global.js"></script> -->
-<!-- COMMENT OUT THIS LINE FOR JATOS DISTRIBUTION -->
-  <script src="../dist/index.browser.js"></script>
-  <!-- UNCOMMENT THESE NEXT TWO LINES FOR JATOS DISTRIBUTION
-  <script src="jspsych/jspsych.js"></script>
-  <script src="jspsych/plugin-jatos-group-chat.js"></script> -->
+  <!-- COMMENT OUT THIS LINE FOR JATOS DISTRIBUTION
+<script src="../dist/index.browser.js"></script>-->
+  <!-- UNCOMMENT THESE NEXT TWO LINES FOR JATOS DISTRIBUTION -->
   <script src="jatos.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/jspsych/css/jspsych.css">
+  <script src="jspsych/jspsych.js"></script>
+  <script src="jspsych/plugin-jatos-group-chat.js"></script>
+  <link href="jspsych/jspsych.css" rel="stylesheet" type="text/css">
+
+  <!-- <script src="jspsych/plugin-jatos-waiting-room.js"></script> -->
+
+  <!-- <link rel="stylesheet" href="https://unpkg.com/jspsych/css/jspsych.css"> -->
 </head>
 
-<body></body>
+<body>
 <script>
-  /** example assumes that you already have jatos installed and is running this with a jatos thing.*/
-  var jsPsych = initJsPsych({
-    on_trial_start: jatos.addAbortButton,
-    on_finish: () => jatos.endStudy(jsPsych.data.get().json())
-  });
 
-  const trial = {
-    type: jsPsychPluginJatosGroupChat
-  };
+    const jsPsych = initJsPsych({
+        on_trial_start: jatos.addAbortButton,
+        on_finish: () => {
+            jatos.endStudy(jsPsych.data.get().json())
+            jsPsych.data.displayData();
+        }
+    });
 
-  jatos.onLoad(() => {
-    jsPsych.run(trial);
-  });
+    function generateMemberId(jatosMemberId) {
+      return `Member_${jatosMemberId}`
+    };
+
+    const chatTrial = {
+        type: jsPsychPluginJatosGroupChat,
+        message_placeholder: "Type your message and press Enter...",
+        button_label_send: "Send Message",
+        button_label_end_study: "Finish Chat",
+        //username_generator_function: generateMemberId,
+        on_finish: function (data) {
+            console.log("Chat trial finished. Data:", data);
+        }
+    };
+
+    jatos.onLoad(() => {
+        jsPsych.run([chatTrial]);
+    });
+
+
 </script>
+</body>
 
 </html>
