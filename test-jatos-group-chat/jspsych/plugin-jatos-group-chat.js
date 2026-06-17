@@ -158,8 +158,8 @@ var jsPsychPluginJatosGroupChat = (function (jspsych) {
       };
       const stringToColour = (str) => {
         let numericValue = 0;
-        for (let i = 0; i < str.length; i++) {
-          numericValue += str.charCodeAt(i);
+        for (let charIndex = 0; charIndex < str.length; charIndex++) {
+          numericValue += str.charCodeAt(charIndex);
         }
         const randomVal = Math.abs(Math.sin(numericValue));
         const h = Math.floor(randomVal * 360);
@@ -264,8 +264,8 @@ var jsPsychPluginJatosGroupChat = (function (jspsych) {
         };
         try {
           this.jatos.sendGroupMsg(chatBundle);
-        } catch (e) {
-          onError("Failed to send message via JATOS: " + (e.message || e));
+        } catch (sendError) {
+          onError("Failed to send message via JATOS: " + (sendError.message || sendError));
         }
         appendToHistory(`${getTime()} - You: ${msg}`, msg, memberId, stringToColour(String(memberId)));
       });

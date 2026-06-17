@@ -20,6 +20,7 @@
   <!-- <link rel="stylesheet" href="https://unpkg.com/jspsych/css/jspsych.css"> -->
 </head>
 
+<body>
 <script>
 
     const jsPsych = initJsPsych({
@@ -36,7 +37,7 @@
 
     const chatTrial = {
         type: jsPsychPluginJatosGroupChat,
-        prompt: "Type your message and press Enter...",
+        message_placeholder: "Type your message and press Enter...",
         button_label_send: "Send Message",
         button_label_end_study: "Finish Chat",
         //username_generator_function: generateMemberId,
@@ -51,7 +52,6 @@
 
 
 </script>
-
-<body></body>
+</body>
 
 </html>

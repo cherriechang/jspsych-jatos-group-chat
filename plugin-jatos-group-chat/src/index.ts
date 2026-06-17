@@ -218,8 +218,8 @@ class JatosGroupChatPlugin implements JsPsychPlugin<Info> {
       // Similar to your original approach, using Math.sin for randomness
       // Convert string to a numeric value first
       let numericValue = 0;
-      for (let i = 0; i < str.length; i++) {
-        numericValue += str.charCodeAt(i);
+      for (let charIndex = 0; charIndex < str.length; charIndex++) {
+        numericValue += str.charCodeAt(charIndex);
       }
       
       // Generate a random-feeling but deterministic color using sin
@@ -304,7 +304,7 @@ class JatosGroupChatPlugin implements JsPsychPlugin<Info> {
        * Appends error message to chat log history *
        */ 
       const message = "An error occurred: " + error;
-      appendToHistory( `${getTime()} - ${message}`, message, "system" + this.jatos.groupResultId, defaultColor, true);
+      appendToHistory( `${getTime()} - ${message}`, message, "system" + this.jatos.groupResultId, errorColor, true);
       //this.trial_data.events.push({ type: "jatos_error", timestamp: new Date().toISOString(), error: String(error) });
     };
 
@@ -398,8 +398,8 @@ class JatosGroupChatPlugin implements JsPsychPlugin<Info> {
       /* Sends the message and records any errors that may arise */
       try {
         this.jatos.sendGroupMsg(chatBundle);
-      } catch (e) {
-        onError("Failed to send message via JATOS: " + (e.message || e));
+      } catch (sendError) {
+        onError("Failed to send message via JATOS: " + (sendError.message || sendError));
       }
  
       appendToHistory(`${getTime()} - You: ${msg}`, msg, memberId, stringToColour(String(memberId)));

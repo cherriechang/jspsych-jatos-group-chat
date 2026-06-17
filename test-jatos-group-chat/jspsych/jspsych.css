@@ -27,7 +27,7 @@
   max-width: 700px;
   margin: 40px auto;
   font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-  display: box;
+  display: flex;
   flex-direction: column;
   height: 80vh;
   overflow: hidden;
@@ -75,13 +75,13 @@
 }
 
 .jspsych-middle {
-  align-items: left;
+  align-items: flex-start;
 }
 
 /* fonts and type */
 .jspsych-display-element {
   font-family: "Source Sans Pro", "Arial", sans-serif;
-  font-size: px20;
+  font-size: 20px;
   line-height: 1.6em;
 }
 
@@ -92,7 +92,6 @@
 }
 
 #jatos-group-chat-input {
-  position: left
 }
 
 #jatos-chat-history li {
@@ -111,7 +110,6 @@
 }
 
 #jatos-sendMsgButton {
-  position: right;
   display: inline-flex;
   align-items: center;
   justify-content: center;
